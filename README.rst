@@ -44,4 +44,13 @@ http://logstash.net/docs/1.4.2/
 
 You can install them all, or you can install just a few individually.
 
+**Installation Steps:**
+
+1. Setup and partition server. Many of the guidelines from the Moloch documentation hold true here. Recommend fresh updated version of RHEL/Centos 6.6
+2. git clone https://github.com/hadojae/redonion
+3. Modify the global variables at the top of redonion_bootstrap.sh to fit your deployment
+4. Run './redonion_bootstrap.sh -ro' as root
+5. Follow any prompts during the script
+6. When complete if running -ro install it will ask you to start up all the things, either start them then or later by uncommenting persistence script in crontab.
+
 Please find further documentation on the wiki: https://github.com/hadojae/redonion/wiki/Red-Onion-Installation-Guide
