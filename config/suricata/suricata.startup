@@ -1,0 +1,72 @@
+#!/bin/bash
+#
+# Init file for suricata
+#
+#
+# chkconfig: 345 52 48
+# description: Network Intrusion Detection System
+#
+# processname: Suricata
+# pidfile: /var/run/suricata.pid
+
+source /etc/rc.d/init.d/functions
+
+
+### Read configuration
+[ -r "$SYSCONFIG" ] && source "$SYSCONFIG"
+
+RETVAL=0
+prog="suricata"
+desc="Suricata IDS"
+
+start() {
+    echo -n $"Starting $desc ($prog): "
+
+    daemon suricata -c /etc/suricata.yaml -i eth0 
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch /var/lock/subsys/$prog
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Shutting down $desc ($prog): "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/$prog
+    return $RETVAL
+}
+
+restart() {
+    stop
+    start
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  reload)
+    reload
+    ;;
+  condrestart)
+    [ -e /var/lock/subsys/$prog ] && restart
+    RETVAL=$?
+    ;;
+  status)
+    status $prog
+    RETVAL=$?
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart|reload|condrestart|status}"
+    RETVAL=1
+esac
+
+exit $RETVAL

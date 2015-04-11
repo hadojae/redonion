@@ -1,0 +1,82 @@
+#!/bin/bash
+#
+# Init file for logstash
+#
+# chkconfig: 345 52 48
+# description: Logstash Log Aggregation
+#
+# processname: Logstash
+# pidfile: /var/run/logstash.pid
+
+source /etc/rc.d/init.d/functions
+
+### Read configuration
+[ -r "$SYSCONFIG" ] && source "$SYSCONFIG"
+
+RETVAL=0
+prog="logstash"
+desc="Logstash Log Aggregation"
+logstash_bin="/opt/logstash/bin/logstash"
+logstash_conf="/etc/logstash/conf.d/central.conf"
+
+start() {
+    echo -n $"Starting $desc ($prog): "
+
+    daemon $logstash_bin agent -f $logstash_conf
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch /var/lock/subsys/$prog
+    return $RETVAL
+}
+
+start_web() {
+    echo -n $"Starting $desc ($prog): "
+
+    daemon $logstash_bin agent -f $logstash_conf web
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch /var/lock/subsys/$prog
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Shutting down $desc ($prog): "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/$prog
+    return $RETVAL
+}
+
+restart() {
+    stop
+    start
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  reload)
+    reload
+    ;;
+  condrestart)
+    [ -e /var/lock/subsys/$prog ] && restart
+    RETVAL=$?
+    ;;
+  status)
+    status $prog
+    RETVAL=$?
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart|reload|condrestart|status}"
+    RETVAL=1
+esac
+
+exit $RETVAL
