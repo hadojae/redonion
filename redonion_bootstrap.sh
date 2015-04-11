@@ -45,10 +45,10 @@ splunk_bro_index="redonion_bro"			# if using splunk, the name of the index you w
 splunk_suricata_index="redonion_suri"		# if using splunk, the name of the index you want to use for Suricata logs
 
 logstash_elasticsearch_host="10.10.2.23"	# if using logstash_elasticsearch mode - the host/ip of your receiving node on your cluster
-logstash_elasticsearch_port="9200"		# if using logstash_elasticsearch mode - the port elasticsearch wants traffic on
+logstash_elasticsearch_port=9200		# if using logstash_elasticsearch mode - the port elasticsearch wants traffic on *no quotes
 
 logstash_syslog_ip="10.10.2.23"                	# if using logstash_syslog, the ip of your syslog receiver
-logstash_syslog_port="514"			# if using logstash_syslog, the port your syslog receiver expects traffic on
+logstash_syslog_port=514			# if using logstash_syslog, the port your syslog receiver expects traffic on *no quotes
 logstash_syslog_protocol="udp"			# if using logstash_syslog, the protocol you want to use - tcp or udp 
 
 #############################################
@@ -1337,7 +1337,7 @@ function alldone ()
         $install_dir/bro/bin/broctl check
         print_status "Fixing up crontab for bro and persistence..."
 	crontab -l | sed 's,#0-59/5,0-59/5,' | crontab -
-        crontab -l | sed 's,#*/2,*/2,' | crontab -
+        crontab -l | sed 's,#\*/2,\*/2,' | crontab -
         print_good "Persistence running, give it a few minutes and everything will be up and running."
         print_status "Please report any issues to https://github.com/hadojae/redonion"
         print_good "Thanks! :)"
