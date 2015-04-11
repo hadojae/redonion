@@ -46,7 +46,7 @@ You can install them all, or you can install just a few individually.
 
 **Installation Steps:**
 
-1. Setup and partition server. Many of the guidelines from the Moloch documentation hold true here. Recommend fresh updated version of RHEL/Centos 6.6
+1. Setup and partition server. Recommend fresh updated version of RHEL/Centos 6.6
 2. git clone https://github.com/hadojae/redonion
 3. Modify the global variables at the top of redonion_bootstrap.sh to fit your deployment
 4. Run './redonion_bootstrap.sh -ro' as root
