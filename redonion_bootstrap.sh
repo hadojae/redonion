@@ -1109,9 +1109,6 @@ if [[ $SKIP == 0 ]]; then
   
   # I need to sed where the raw pcap will be stored in the config.ini.template file
   sed -i "s,pcapDir = _TDIR_/raw,pcapDir = ${pcap_data_dir}," $wrk_dir/moloch/single-host/etc/config.ini.template
-
-  # Sometimes ES takes longer to loadup depending on hardware
-  #sed -i "s,sleep 10,sleep 30," $wrk_dir/moloch/easybutton-singlehost.sh
  
   print_status "Installing Moloch...this will take some time..."
   ./easybutton-singlehost.sh 
@@ -1314,7 +1311,6 @@ if [[ $log_method == logstash* ]]; then
 
    print_status "Cleanup and Done"
    rm -rf $wrk_dir/logstash-1.4.2-1_2c0f5a1.noarch.rpm
-   service logstash start
    print_good "Logstash installed"
    print_good 
 
