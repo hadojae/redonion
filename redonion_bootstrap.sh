@@ -1307,11 +1307,6 @@ if [[ $log_method == logstash* ]]; then
      exit 0
    fi
 
-   print_status "crontab @reboot to start logstash"
-   line_logagg="@reboot /etc/init.d/logstash start"
-   (crontab -l; echo "$line_logagg" ) | crontab -
-   handle_error 
-
    print_status "Cleanup and Done"
    rm -rf $wrk_dir/logstash-1.4.2-1_2c0f5a1.noarch.rpm
    /etc/init.d/logstash start
