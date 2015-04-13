@@ -1294,6 +1294,11 @@ if [[ $log_method == logstash* ]]; then
 
    print_status "Copy over init script"
    mv $wrk_dir/config/logstash/logstash.startup /etc/init.d/logstash
+   handle_error
+   
+   print_status "Fixup SINCEDB_DIR path"
+   sed -i "s,CHANGESINCEDB,${install_dir}," /etc/init.d/logstash
+   handle_error
 
    print_status "Sed config params in the logstash conf file..."
    if [[ $log_method == logstash_elasticsearch ]]; then
