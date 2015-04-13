@@ -1073,6 +1073,9 @@ if [[ $SKIP == 0 ]]; then
   print_status "cd moloch..."
   cd moloch
   handle_error
+  print_status "Fixup how much memory to give elasticsearch."
+  sed -i "s,read ESMEM,ESMEM=${es_mem}," easybutton-singlehost.sh
+  handle_error
   print_status "fixing up tdir in easybutton-singlehost.sh..."
   sed -i "s,TDIR=/data/moloch,TDIR=$install_dir/moloch," easybutton-singlehost.sh
   handle_error
