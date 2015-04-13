@@ -1309,7 +1309,7 @@ if [[ $log_method == logstash* ]]; then
 
    print_status "Cleanup and Done"
    rm -rf $wrk_dir/logstash-1.4.2-1_2c0f5a1.noarch.rpm
-   /etc/init.d/logstash start
+   service logstash start
    print_good "Logstash installed"
    print_good 
 
