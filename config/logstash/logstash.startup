@@ -13,6 +13,8 @@ source /etc/rc.d/init.d/functions
 ### Read configuration
 [ -r "$SYSCONFIG" ] && source "$SYSCONFIG"
 
+export SINCEDB_DIR="CHANGESINCEDB/logstash/"
+
 RETVAL=0
 prog="logstash"
 desc="Logstash Log Aggregation"
