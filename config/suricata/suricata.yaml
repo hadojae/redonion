@@ -84,7 +84,7 @@ outputs:
 
   # Extensible Event Format (nicknamed EVE) event log in JSON format
   - eve-log:
-      enabled: no
+      enabled: yes
       type: file #file|syslog|unix_dgram|unix_stream
       filename: eve.json
       # the following are valid when type: syslog above
@@ -94,19 +94,19 @@ outputs:
                    ## Error, Warning, Notice, Info, Debug
       types:
         - alert
-        - http:
-            extended: yes     # enable this for extended logging information
+        #- http:
+        #    extended: yes     # enable this for extended logging information
             # custom allows additional http fields to be included in eve-log
             # the example below adds three additional fields when uncommented
             #custom: [Accept-Encoding, Accept-Language, Authorization]
-        - dns
-        - tls:
-            extended: yes     # enable this for extended logging information
-        - files:
-            force-magic: no   # force logging magic on all logged files
-            force-md5: no     # force logging of md5 checksums
+        #- dns
+        #- tls:
+        #    extended: yes     # enable this for extended logging information
+        #- files:
+        #    force-magic: no   # force logging magic on all logged files
+        #    force-md5: no     # force logging of md5 checksums
         #- drop
-        - ssh
+        #- ssh
 
   # alert output for use with Barnyard2
   - unified2-alert:
