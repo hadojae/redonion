@@ -36,6 +36,8 @@ moloch_locality="HERE"				# Locality for Moloch Cert
 es_ver="1.4.4"					# What version of elasticsearch are you using for moloch?
 esdb_dir="$install_dir/esdb"                    # Where should Moloch store elasticsearch data?
 pcap_data_dir="$install_dir/moloch/raw"         # Where should Moloch store raw pcaps? eg. $dir_1;$dir_2;$dir_3
+#netflow_collector="10.10.2.120:9995"		# IP address and port of a netflow collector. If none leave empty.
+#netflow_version="5"				# What version of Netflow do you want to use? If none leave empty.
 
 ### Log Aggregation Globals ###
 log_method="logstash_elasticsearch"		# options are splunk, logstash_elasticsearch, or logstash_syslog
