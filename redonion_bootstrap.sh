@@ -501,9 +501,12 @@ EOF
     print_status "Moloch Org Unit: $moloch_orgunit"
     print_status "Moloch Locality: $moloch_locality"
   fi
+  
+  # Date
+  print_status "Current Date: $(date)" 
   echo -e ""
 
-  pause "Please press [ENTER] to continue or CTRL+C to quit."
+  pause "Please verify the above settings and press [ENTER] to continue or CTRL+C to quit."
 
 }
 
