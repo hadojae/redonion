@@ -2,10 +2,10 @@
  
 # stupid globals
 es_version=CHANGEESVER
-moloch_workdir=/opt/moloch/bin
-splunk_workdir=/opt/splunkforwarder/bin
-suricata_workdir=/opt/suricata/bin
-bro_workdir=/opt/bro/bin
+moloch_workdir=CHANGEDIR/moloch/bin
+splunk_workdir=CHANGEDIR/splunkforwarder/bin
+suricata_workdir=CHANGEDIR/suricata/bin
+bro_workdir=CHANGEDIR/bro/bin
 is_es_running=0
 is_viewer_running=0
 is_capture_running=0
