@@ -1,7 +1,7 @@
 #!/bin/bash
  
 # stupid globals
-es_version=1.4.4
+es_version=CHANGEESVER
 moloch_workdir=/opt/moloch/bin
 splunk_workdir=/opt/splunkforwarder/bin
 suricata_workdir=/opt/suricata/bin
@@ -123,7 +123,7 @@ if [ $is_es_running -eq 0 ]; then
         ulimit -a
         export JAVA_HOME=/usr/bin/java
         export ES_HOSTNAME=`hostname -s`a
-        ES_HEAP_SIZE=30G bin/elasticsearch -Des.config=/opt/moloch/etc/elasticsearch.yml
+        ES_HEAP_SIZE=CHANGEESMEM bin/elasticsearch -d -Des.config=/opt/moloch/etc/elasticsearch.yml
  
         #restart capture
  
