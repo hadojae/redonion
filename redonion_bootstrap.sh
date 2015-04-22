@@ -710,6 +710,13 @@ function bro ()
   print_status "!!!!!!!!!!!!!!!!!!!!!!!!!!"
   space_pls
 
+  sniff_driver=$(ethtool -i $sniff_int | grep driver | awk '{ print $2 }')
+  if [[ $sniff_driver == "igb" || $sniff_driver == "e1000e" || $sniff_driver == "ixgbe" ]]; then
+    pfring_zc_enabled=true
+  else
+    pfring_zc_enabled=false
+  fi
+
   SKIP=0
   if [ -d "$install_dir/bro/bin" ]; then
     print_error "It looks like bro may already be installed...do you want to install it again? (y/n): "
@@ -776,18 +783,20 @@ function bro ()
     cat $install_dir/bro/etc/node.cfg
     sleep 10
     
-    print_status "Checking to make sure bro compiled with pfring properly..."
-    if [[ -z `ldd $install_dir/bro/bin/bro | grep pfring` ]]; then
-      print_error "It looks like bro didnt properly link libpcap...here look:"
-      ldd $install_dir/bro/bin/bro | grep libpcap
-      print_error "That should point to '/usr/local/pfring/lib/libpcap.so.1'"
-      print_error "You will need to make sure pfring installed properly and that bro is properly searching for the so."
-      exit 0
-    else
-      print_good "Looks good."
-      ldd $install_dir/bro/bin/bro | grep libpcap
+    if [ $pfring_zc_enabled == "true" ]; then
+     print_status "Checking to make sure bro compiled with pfring properly..."
+     if [[ -z `ldd $install_dir/bro/bin/bro | grep pfring` ]]; then
+       print_error "It looks like bro didnt properly link libpcap...here look:"
+       ldd $install_dir/bro/bin/bro | grep libpcap
+       print_error "That should point to '/usr/local/pfring/lib/libpcap.so.1'"
+       print_error "You will need to make sure pfring installed properly and that bro is properly searching for the so."
+       exit 0
+     else
+       print_good "Looks good."
+       ldd $install_dir/bro/bin/bro | grep libpcap
+     fi
     fi
-    
+     
     print_status "cleanup..."
     rm -rf $wrk_dir/bro-2.3.2
     handle_error
@@ -817,6 +826,13 @@ function suricata ()
   print_status "!!!!! Installing Suricata !!!!!"
   print_status "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
   space_pls
+
+  sniff_driver=$(ethtool -i $sniff_int | grep driver | awk '{ print $2 }')
+  if [[ $sniff_driver == "igb" || $sniff_driver == "e1000e" || $sniff_driver == "ixgbe" ]]; then
+    pfring_zc_enabled=true
+  else
+    pfring_zc_enabled=false
+  fi
 
   SKIP=0
   if [ -d "$install_dir/suricata/bin" ]; then
@@ -1021,6 +1037,7 @@ EOF
     wget http://rules.emergingthreats.net/open/suricata-1.3/classification.config
     wget http://rules.emergingthreats.net/open/suricata-1.3/reference.config
    
+   if [ $pfring_zc_enabled == "true" ]; then
     print_status "Checking to make sure Suricata compiled with pfring properly..."
     if [[ -z `ldd $install_dir/suricata/bin/suricata | grep pfring` ]]; then
       print_error "It looks like suricata didnt properly link libpfring...here look:"
@@ -1032,6 +1049,7 @@ EOF
       print_good "Looks good."
       ldd $install_dir/suricata/bin/suricata | grep libpfring
     fi
+   fi
  
     print_status "cleanup and moving back to working dir..."
     rm -rf $wrk_dir/suricata-2.0.7
