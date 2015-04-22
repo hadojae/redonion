@@ -1148,9 +1148,6 @@ if [[ $SKIP == 0 ]]; then
   sed -i "s,CHANGEESVER,${es_ver}," $install_dir/ro_persist.sh
   sed -i "s,CHANGEDIR,${install_dir}," $install_dir/ro_persist.sh
   sed -i "s,CHANGEESMEM,${es_mem}," $install_dir/ro_persist.sh
-  print_status "fixing up the dirs in the persistance scripts..."
-  sed -i "s,/opt,${install_dir}," $install_dir/ro_persist.sh
-  handle_error
   sed -i 's/freeSpaceG = 600/freeSpaceG = 100/' $install_dir/moloch/etc/config.ini
   handle_error
   print_status "Opening up ports for moloch viewer and ES via iptables..."
