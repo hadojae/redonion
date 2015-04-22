@@ -856,7 +856,7 @@ function suricata ()
 
     # Lua scripting support
     if [ -f /etc/centos-release ]; then
-      yum install -y luarocks cmake lua-devel apr-devel apr-util-devel libapreq2 libapreq2-devel zziplib zziplib-devel 
+      yum install -y zip unzip luarocks cmake lua-devel apr-devel apr-util-devel libapreq2 libapreq2-devel zziplib zziplib-devel 
     fi
 
     print_status "Decompressing Lua Thirdparty Modules"
