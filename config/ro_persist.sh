@@ -119,11 +119,11 @@ if [ $is_es_running -eq 0 ]; then
  
         #start es
  
-        cd /opt/moloch/elasticsearch-$es_version/
+        cd CHANGEDIR/moloch/elasticsearch-$es_version/
         ulimit -a
         export JAVA_HOME=/usr/bin/java
         export ES_HOSTNAME=`hostname -s`a
-        ES_HEAP_SIZE=CHANGEESMEM bin/elasticsearch -d -Des.config=/opt/moloch/etc/elasticsearch.yml
+        ES_HEAP_SIZE=CHANGEESMEM bin/elasticsearch -d -Des.config=CHANGEDIR/moloch/etc/elasticsearch.yml
  
         #restart capture
  
