@@ -806,6 +806,10 @@ function bro ()
     print_status "adding broctl cron..."
     line_bro="0-59/5 * * * *    $install_dir/bro/bin/broctl cron"
     (crontab -l; echo "$line_bro" ) | crontab -
+    sed -i "s,/var/opt/bro/spool,${install_dir}/bro/spool," $install_dir/bro/etc/broctl.cfg
+    handle_error
+    sed -i "s,/var/opt/bro/logs,${install_dir}/bro/logs," $install_dir/bro/etc/broctl.cfg
+    handle_error
     print_status "moving back to the working dir..."
     cd $wrk_dir
     handle_error
