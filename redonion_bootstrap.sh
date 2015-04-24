@@ -762,9 +762,6 @@ function bro ()
     print_status "make install..."
     make install 
     handle_error
-    print_status "adding broctl cron..."
-    line_bro="#0-59/5 * * * *    $install_dir/bro/bin/broctl cron"
-    (crontab -l; echo "$line_bro" ) | crontab -
     print_status "Building BRO config based on global vars..."
     sed -i 's,interface=eth0,#interface=eth0,' $install_dir/bro/etc/node.cfg
     echo -e "[manager]\ntype=manager\nhost=$manage_ip\n\n" >> $install_dir/bro/etc/node.cfg
@@ -804,6 +801,11 @@ function bro ()
     handle_error
     $install_dir/bro/bin/broctl check
     handle_error
+    $install_dir/bro/bin/broctl cron enable
+    handle_error
+    print_status "adding broctl cron..."
+    line_bro="0-59/5 * * * *    $install_dir/bro/bin/broctl cron"
+    (crontab -l; echo "$line_bro" ) | crontab -
     print_status "moving back to the working dir..."
     cd $wrk_dir
     handle_error
