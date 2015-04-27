@@ -797,11 +797,11 @@ function bro ()
     print_status "cleanup..."
     rm -rf $wrk_dir/bro-2.3.2
     handle_error
+    $install_dir/bro/bin/broctl cron enable
+    handle_error
     $install_dir/bro/bin/broctl install
     handle_error
     $install_dir/bro/bin/broctl check
-    handle_error
-    $install_dir/bro/bin/broctl cron enable
     handle_error
     print_status "adding broctl cron..."
     line_bro="0-59/5 * * * *    $install_dir/bro/bin/broctl cron"
