@@ -1316,13 +1316,15 @@ if [[ $log_method == logstash* ]]; then
      exit 0
    fi
 
-   print_status "Copy over init script"
-   mv $wrk_dir/config/logstash/logstash.startup /etc/init.d/logstash
-   handle_error
+   #Shouldn't need this anymore...
    
-   print_status "Fixup SINCEDB_DIR and DIR paths"
-   sed -i "s,CHANGEDIR,${install_dir}," /etc/init.d/logstash
-   handle_error
+   #print_status "Copy over init script"
+   #mv $wrk_dir/config/logstash/logstash.startup /etc/init.d/logstash
+   #handle_error
+   
+   #print_status "Fixup SINCEDB_DIR and DIR paths"
+   #sed -i "s,CHANGEDIR,${install_dir}," /etc/init.d/logstash
+   #handle_error
 
    print_status "Sed config params in the logstash conf file..."
    if [[ $log_method == logstash_elasticsearch ]]; then
@@ -1336,6 +1338,21 @@ if [[ $log_method == logstash* ]]; then
      exit 0
    fi
 
+   # additional packages needed for logstash syslog 
+   if [[ $log_method == logstash_syslog ]]; then
+     print_status "Installing logstash contrib packages for logstash syslog"
+     cd $install_dir
+     wget http://download.elasticsearch.org/logstash/logstash/logstash-contrib-1.4.2.tar.gz
+     handle_error
+     tar xzf logstash-contrib-1.4.2.tar.gz
+     handle_error
+     yes | cp -rf logstash-contrib-1.4.2/* logstash > /dev/null
+     handle_error
+     rm -rf logstash-contrib-1.4.2 logstash-contrib-1.4.2.tar.gz
+     handle_error
+     cd $wrk_dir
+   fi
+     
    print_status "Cleanup and Done"
    rm -rf $wrk_dir/logstash-1.4.2-1_2c0f5a1.noarch.rpm
    print_good "Logstash installed"
@@ -1355,11 +1372,7 @@ function alldone ()
   print_status "Do you want to start everything up now?: (y/n)"
   read answer
     if [[ $answer == "y" ]]; then
-        print_status "Installing and checking bro..."
-        $install_dir/bro/bin/broctl install
-        $install_dir/bro/bin/broctl check
         print_status "Fixing up crontab for bro and persistence..."
-	crontab -l | sed 's,#0-59/5,0-59/5,' | crontab -
         crontab -l | sed 's,#\*/2,\*/2,' | crontab -
         print_good "Persistence running, give it a few minutes and everything will be up and running."
         print_status "Please report any issues to https://github.com/hadojae/redonion"
