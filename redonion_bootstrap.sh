@@ -42,7 +42,7 @@ pcap_data_dir="$install_dir/moloch/raw"         # Where should Moloch store raw 
 ### Log Aggregation Globals ###
 log_method="logstash_elasticsearch"		# options are splunk, logstash_elasticsearch, or logstash_syslog
 
-splunk_fwd="10.10.2.23"				# if using splunk, the ip and port you're forwarding logs to, if multiple separate by comma and space
+splunk_fwd="10.10.2.23:9997"				# if using splunk, the ip and port you're forwarding logs to, if multiple separate by comma and space
 splunk_bro_index="redonion_bro"			# if using splunk, the name of the index you want to use for Bro logs
 splunk_suricata_index="redonion_suri"		# if using splunk, the name of the index you want to use for Suricata logs
 
