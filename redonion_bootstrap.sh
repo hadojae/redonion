@@ -1272,14 +1272,11 @@ if [ $log_method == "splunk" ]; then
   print_status "Skipping splunk install..."
  fi
 
-  # crontab @reboot
+  #Cleanup and Done crontab @reboot
   line_splunk="@reboot $install_dir/splunk/bin/splunk start"
   (crontab -l; echo "$line_splunk" ) | crontab -
   handle_error
-
-  #Cleanup and Done
   rm -rf $wrk_dir/splunk
-  $install_dir/splunk/bin/splunk start
   print_good "Splunk installed"
 
  else
