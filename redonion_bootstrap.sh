@@ -1253,10 +1253,10 @@ if [ $log_method == "splunk" ]; then
   cp outputs.conf $install_dir/splunkforwarder/etc/system/local/
   cp props.conf $install_dir/splunkforwarder/etc/system/local/
   sed -i "s,CHANGEDIR,${install_dir}," $install_dir/splunkforwarder/etc/system/local/inputs.conf
-  sed -i "s,CHANGEBRO,${bro_index}," $install_dir/splunkforwarder/etc/system/local/inputs.conf
-  sed -i "s,CHANGESURI,${suricata_index}," $install_dir/splunkforwarder/etc/system/local/inputs.conf
-  sed -i "s,CHANGEBRO,${bro_index}," $install_dir/splunkforwarder/etc/system/local/props.conf
-  sed -i "s,CHANGESURI,${suricata_index}," $install_dir/splunkforwarder/etc/system/local/props.conf
+  sed -i "s,CHANGEBRO,${splunk_bro_index}," $install_dir/splunkforwarder/etc/system/local/inputs.conf
+  sed -i "s,CHANGESURI,${splunk_suricata_index}," $install_dir/splunkforwarder/etc/system/local/inputs.conf
+  sed -i "s,CHANGEBRO,${splunk_bro_index}," $install_dir/splunkforwarder/etc/system/local/props.conf
+  sed -i "s,CHANGESURI,${splunk_suricata_index}," $install_dir/splunkforwarder/etc/system/local/props.conf
   echo -e "server = $splunk_fwd" >> $install_dir/splunkforwarder/etc/system/local/outputs.conf
 
   # crontab @reboot
