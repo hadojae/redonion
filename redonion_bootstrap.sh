@@ -1323,17 +1323,17 @@ if [[ $log_method == logstash* ]]; then
    mv $wrk_dir/config/logstash/logstash.startup /etc/init.d/logstash
    handle_error
    
-   print_status "Fixup SINCEDB_DIR path"
-   sed -i "s,CHANGESINCEDB,${install_dir}," /etc/init.d/logstash
+   print_status "Fixup SINCEDB_DIR and DIR paths"
+   sed -i "s,CHANGEDIR,${install_dir}," /etc/init.d/logstash
    handle_error
 
    print_status "Sed config params in the logstash conf file..."
    if [[ $log_method == logstash_elasticsearch ]]; then
-     sed -i "s,CHANGEHOST,${logstash_elasticsearch_host}," /etc/logstash/conf.d/central.conf
+     sed -i "s,CHANGEHOST,\"${logstash_elasticsearch_host}\"," /etc/logstash/conf.d/central.conf
      sed -i "s,"CHANGEPORT",${logstash_elasticsearch_port}," /etc/logstash/conf.d/central.conf
    elif [[ $log_method == logstash_syslog ]]; then
-     sed -i "s,CHANGEHOST,${logstash_syslog_ip}," /etc/logstash/conf.d/central.conf
-     sed -i "s,"CHANGEPORT",${logstash_syslog_port}," /etc/logstash/conf.d/central.conf
+     sed -i "s,CHANGEHOST,\"${logstash_syslog_ip}\"," /etc/logstash/conf.d/central.conf
+     sed -i "s,CHANGEPORT,${logstash_syslog_port}," /etc/logstash/conf.d/central.conf
      sed -i "s,CHANGEPROTOCOL,${logstash_syslog_protocol}," /etc/logstash/conf.d/central.conf
    else
      exit 0
