@@ -1353,10 +1353,12 @@ if [[ $log_method == logstash* ]]; then
      cd $wrk_dir
    fi
      
-   print_status "Cleanup and Done"
+   print_status "Crontab, Cleanup, and Done"
+   line_logstash="@reboot service logstash start"
+   (crontab -l; echo "$line_logstash" ) | crontab -
+   handle_error
    rm -rf $wrk_dir/logstash-1.4.2-1_2c0f5a1.noarch.rpm
    print_good "Logstash installed"
-   print_good 
 
  else
    print_status "Skipping logstash install..."
