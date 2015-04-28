@@ -1034,7 +1034,7 @@ EOF
     sed -i "s,  - interface: eth0,  - interface: $sniff_int," $install_dir/suricata/etc/suricata/suricata.yaml
     sed -i "s,/opt,$install_dir," $install_dir/suricata/etc/suricata/suricata.yaml 
     sed -i "s,CHANGEME,${user_drop}," $install_dir/suricata/etc/suricata/suricata.yaml
-    sed -i "s,/var/log/suricata.log,${install_dir}/var/log/suricata.log," $install_dir/suricata/etc/suricata/suricata.yaml
+    sed -i "s,/var/log/suricata.log,${install_dir}/suricata/var/log/suricata.log," $install_dir/suricata/etc/suricata/suricata.yaml
 
     # Copy over updated classification and reference file
     
