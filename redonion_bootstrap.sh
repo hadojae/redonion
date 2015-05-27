@@ -391,13 +391,6 @@ EOF
      ftp_proxy=$proxy_ip":"$proxy_port
      export http_proxy https_proxy ftp_proxy HTTP_PROXY HTTPS_PROXY
 
-     #SVN proxy stuff
-     cp /root/.subversion/servers /root/.subversion/.servers.old
-     echo -e "http-proxy-host = $proxy_ip" >> /root/.subversion/servers     # The only part that uses svn is pf_ring
-     sed -i "s,http://,," /root/.subversion/servers
-     echo -e "http-proxy-port = $proxy_port" >> /root/.subversion/servers   # so we remove these svn proxy settings 
-     echo -e "http-proxy-compression = no" >> /root/.subversion/servers     # at the end of the pf_ring function. 
-
      #GIT proxy stuff
      git config --global http.proxy $proxy_ip:$proxy_port
      git config --global https.proxy $proxy_ip:$proxy_port
@@ -521,7 +514,7 @@ function pf_ring_rpm ()
 
   # Install prereqs
   if [ -f /etc/centos-release ]; then
-    yum -y install numactl-devel svn vim-enhanced wget kernel-headers flex bison gcc gcc-c++ make kernel-devel man man-pages screen htop 
+    yum -y install numactl-devel vim-enhanced wget kernel-headers flex bison gcc gcc-c++ make kernel-devel man man-pages screen htop 
   fi
 
   sniff_driver=$(ethtool -i $sniff_int | grep driver | awk '{ print $2 }')
@@ -537,16 +530,16 @@ function pf_ring_rpm ()
     print_error "It looks like pfring may already be downloaded, do you want to install it again? (y/n): "
     read answer
     if [[ $answer == "y" ]] ; then
-      print_status "Pulling pfring src from SVN"
-      svn export https://svn.ntop.org/svn/ntop/trunk/PF_RING/ $install_dir/pfring --force 
+      print_status "Pulling pfring src from Github"
+      git clone https://github.com/ntop/PF_RING $install_dir/pfring
       handle_error
       SKIP=0
     else
       SKIP=1
     fi
   else
-    print_status "Pulling pfring src from SVN"
-    svn export https://svn.ntop.org/svn/ntop/trunk/PF_RING/ $install_dir/pfring --force 
+    print_status "Pulling pfring src from Github"
+    git clone https://github.com/ntop/PF_RING $install_dir/pfring
     handle_error
   fi
 
@@ -689,11 +682,6 @@ function pf_ring_rpm ()
   else
     space_pls
     print_good "Skipped PF_RING install..."
-  fi
-
-  #Cleaning up proxy settings for subversion
-  if [ $proxy_status = true ]; then
-    mv /root/.subversion/.servers.old /root/.subversion/servers
   fi
 
   space_pls
