@@ -728,11 +728,11 @@ function bro ()
   
     #decompress, cd to source
     cd $wrk_dir
-    wget "https://www.bro.org/downloads/release/bro-2.3.2.tar.gz"
+    wget "https://www.bro.org/downloads/release/bro-2.4.tar.gz"
     handle_error
-    tar xzf bro-2.3.2.tar.gz
+    tar xzf bro-2.4.tar.gz
     handle_error
-    cd bro-2.3.2/
+    cd bro-2.4/
     handle_error
 
     #install bro
@@ -783,7 +783,7 @@ function bro ()
     fi
      
     print_status "cleanup..."
-    rm -rf $wrk_dir/bro-2.3.2
+    rm -rf $wrk_dir/bro-2.4
     handle_error
     $install_dir/bro/bin/broctl cron enable
     handle_error
@@ -940,12 +940,12 @@ function suricata ()
     
     # Uncompress Suri install files
     cd $wrk_dir
-    wget "http://www.openinfosecfoundation.org/download/suricata-2.0.7.tar.gz"
+    wget "http://www.openinfosecfoundation.org/download/suricata-2.0.8.tar.gz"
     handle_error
-    tar xzf suricata-2.0.7.tar.gz
+    tar xzf suricata-2.0.8.tar.gz
     handle_error
-    print_status "cd suricata-2.0.7/..."
-    cd suricata-2.0.7/
+    print_status "cd suricata-2.0.8/..."
+    cd suricata-2.0.8/
     handle_error
 
     print_status "Installing suri...wooo..."
@@ -1047,7 +1047,7 @@ EOF
    fi
  
     print_status "cleanup and moving back to working dir..."
-    rm -rf $wrk_dir/suricata-2.0.7
+    rm -rf $wrk_dir/suricata-2.0.8
     handle_error
     cd $wrk_dir
     handle_error
