@@ -268,7 +268,6 @@ function letsgo ()
   # http://pevma.blogspot.com/2014/03/suricata-prepearing-10gbps-network.html
   if [[ -z `cat /etc/sysctl.conf | grep net.core.netdev_max_backlog=250000` ]]; then
     echo 'net.core.netdev_max_backlog=250000' >> /etc/sysctl.conf
-    echo 'net.core.rmem_max = 16777216' >> /etc/sysctl.conf
     echo 'net.core.rmem_max=16777216' >> /etc/sysctl.conf
     echo 'net.core.rmem_default=16777216' >> /etc/sysctl.conf
     echo 'net.core.optmem_max=16777216' >> /etc/sysctl.conf
