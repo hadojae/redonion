@@ -558,7 +558,7 @@ function pf_ring_rpm ()
       yum update 
       handle_error
       print_status "yum install pfring dkms stuff via ntop repo"
-      yum -y install pfring pfring-drivers-zc-dkms igb-zc-5.2.5-1dkms 
+      yum -y install pfring pfring-drivers-zc-dkms igb-zc 
       handle_error
       dkms status
       sleep 10
