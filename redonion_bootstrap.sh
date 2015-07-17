@@ -833,6 +833,14 @@ function suricata ()
     read answer
     if [[ $answer == "y" ]]; then
       print_status "Proceeding to re-install suricata..."
+      print_status "Moving the suricata folder to old_suricata..."
+      mv $install_dir/suricata $install/old_suricata
+      print_status "Removing lua .so's so they can be rebuilt..."
+      rm -f /usr/lib64/lua/5.1/zip.so 
+      rm -f /usr/lib64/lua/5.1/apr 
+      rm -f /usr/lib64/lua/5.1/ltn12ce 
+      rm -f /usr/lib64/lua/5.1/zlib.so 
+      rm -f /usr/lib64/lua/5.1/struct.so
     else
       SKIP=1
     fi
