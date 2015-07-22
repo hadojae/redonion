@@ -1295,10 +1295,10 @@ if [[ $log_method == logstash* ]]; then
  if [[ $SKIP == 0 ]]; then
    print_status "Downloading and Installing Logstash into default directories..."
    cd $wrk_dir
-   wget "https://download.elasticsearch.org/logstash/logstash/packages/centos/logstash-1.4.2-1_2c0f5a1.noarch.rpm"
+   wget "https://download.elastic.co/logstash/logstash/packages/centos/logstash-1.5.3-1.noarch.rpm"
    handle_error
    print_status "Installing Logstash via rpm..."
-   rpm -ivh logstash-1.4.2-1_2c0f5a1.noarch.rpm
+   rpm -ivh logstash-1.5.3-1.noarch.rpm
    handle_error
 
    print_status "Copy over the config file"
@@ -1307,29 +1307,22 @@ if [[ $log_method == logstash* ]]; then
    elif [[ $log_method == logstash_syslog ]]; then
      cp $wrk_dir/config/logstash/central_cluster_syslog.conf /etc/logstash/conf.d/central.conf
    else
-     print_error "Something went wrong..."
+     print_error "Something went wrong copying the config file over..."
      exit 0
    fi
 
-   #Shouldn't need this anymore...
-   
-   #print_status "Copy over init script"
-   #mv $wrk_dir/config/logstash/logstash.startup /etc/init.d/logstash
-   #handle_error
-   
-   #print_status "Fixup SINCEDB_DIR and DIR paths"
-   #sed -i "s,CHANGEDIR,${install_dir}," /etc/init.d/logstash
-   #handle_error
-
    print_status "Sed config params in the logstash conf file..."
    if [[ $log_method == logstash_elasticsearch ]]; then
-     sed -i "s,CHANGEHOST,\"${logstash_elasticsearch_host}\"," /etc/logstash/conf.d/central.conf
-     sed -i "s,"CHANGEPORT",${logstash_elasticsearch_port}," /etc/logstash/conf.d/central.conf
+     sed -i "s,CHANGEHOST,${logstash_elasticsearch_host}," /etc/logstash/conf.d/central.conf
+     sed -i "s,CHANGEPORT,${logstash_elasticsearch_port}," /etc/logstash/conf.d/central.conf
+     sed -i "s,CHANGEDIR,${install_dir}," /etc/logstash/conf.d/central.conf
    elif [[ $log_method == logstash_syslog ]]; then
-     sed -i "s,CHANGEHOST,\"${logstash_syslog_ip}\"," /etc/logstash/conf.d/central.conf
+     sed -i "s,CHANGEHOST,${logstash_syslog_ip}," /etc/logstash/conf.d/central.conf
      sed -i "s,CHANGEPORT,${logstash_syslog_port}," /etc/logstash/conf.d/central.conf
      sed -i "s,CHANGEPROTOCOL,${logstash_syslog_protocol}," /etc/logstash/conf.d/central.conf
+     sed -i "s,CHANGEDIR,${install_dir}," /etc/logstash/conf.d/central.conf
    else
+     print_error "Something went wrong seding the config file..."
      exit 0
    fi
 
@@ -1337,13 +1330,13 @@ if [[ $log_method == logstash* ]]; then
    if [[ $log_method == logstash_syslog ]]; then
      print_status "Installing logstash contrib packages for logstash syslog"
      cd $install_dir
-     wget http://download.elasticsearch.org/logstash/logstash/logstash-contrib-1.4.2.tar.gz
+     wget https://download.elastic.co/logstash/logstash/logstash-contrib-1.4.4.tar.gz
      handle_error
-     tar xzf logstash-contrib-1.4.2.tar.gz
+     tar xzf logstash-contrib-1.4.4.tar.gz
      handle_error
-     yes | cp -rf logstash-contrib-1.4.2/* logstash > /dev/null
+     yes | cp -rf logstash-contrib-1.4.4/* logstash > /dev/null
      handle_error
-     rm -rf logstash-contrib-1.4.2 logstash-contrib-1.4.2.tar.gz
+     rm -rf logstash-contrib-1.4.4 logstash-contrib-1.4.4.tar.gz
      handle_error
      cd $wrk_dir
    fi
@@ -1352,7 +1345,7 @@ if [[ $log_method == logstash* ]]; then
    line_logstash="@reboot service logstash start"
    (crontab -l; echo "$line_logstash" ) | crontab -
    handle_error
-   rm -rf $wrk_dir/logstash-1.4.2-1_2c0f5a1.noarch.rpm
+   rm -rf $wrk_dir/logstash-1.5.3-1.noarch.rpm
    print_good "Logstash installed"
 
  else
