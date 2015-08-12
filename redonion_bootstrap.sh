@@ -128,12 +128,12 @@ function letsgo ()
     print_error "Check for root user failed. Please run this script as root."
     exit 1
   fi
-
-  # Check to see that we're on 6.6 Centos
+  
+  # Check to see that we're on 6.7 Centos
   if [ -f /etc/centos-release ]; then
     distro="CentOS"
-    if [[ ! `grep 6.6 /etc/centos-release` ]]; then
-      print_error "This build script is tested on CENTOS 6.6. Please update via yum."
+    if [[ ! `grep 6.7 /etc/centos-release` ]]; then
+      print_error "This build script is tested on CENTOS 6.7. Please update via yum."
       exit 0
     fi
   fi
@@ -141,8 +141,8 @@ function letsgo ()
   # Haven't tested on RHEL7 yet
   if [ -f /etc/redhat-release ]; then
     distro="RHEL"
-    if [[ ! `grep 6.6 /etc/redhat-release` ]]; then
-      print_error "This build script is tested on RHEL 6.6. Please update via yum or if you're on 7, sorry this doesnt work yet.."
+    if [[ ! `grep 6.7 /etc/redhat-release` ]]; then
+      print_error "This build script is tested on RHEL 6.7. Please update via yum or if you're on 7, sorry this doesnt work yet.."
       exit 0
     fi
   fi
