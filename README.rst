@@ -9,7 +9,7 @@
 
 RedOnion is meant to provide a simple foundational build script for
 those wishing to deploy network security monitoring tools on RHEL/Centos
-6.6.
+6.7.
 
 This script will install the following tools:
 
