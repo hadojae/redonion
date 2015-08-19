@@ -362,18 +362,18 @@ function letsgo ()
     cat << EOF > /etc/yum.repos.d/ntop.repo
 [ntop]
 name=ntop packages
-baseurl=http://www.nmon.net/centos-stable/6Server/x86_64/
+baseurl=http://packages.ntop.org/centos-stable/6Server/x86_64/
 enabled=1
 #proxy=$proxy_ip:$proxy_port
 gpgcheck=1
-gpgkey=http://www.nmon.net/centos-stable/RPM-GPG-KEY-deri
+gpgkey=http://packages.ntop.org/centos-stable/RPM-GPG-KEY-deri
 [ntop-noarch]
 name=ntop packages
-baseurl=http://www.nmon.net/centos-stable/6Server/noarch/
+baseurl=http://packages.ntop.org/centos-stable/6Server/noarch/
 enabled=1
 #proxy=$proxy_ip:$proxy_port
 gpgcheck=1
-gpgkey=http://www.nmon.net/centos-stable/RPM-GPG-KEY-deri
+gpgkey=http://packages.ntop.org/centos-stable/RPM-GPG-KEY-deri
 EOF
     if [ $proxy_status == true ]; then
         sed -i "s/#proxy=/proxy=/" /etc/yum.repos.d/ntop.repo
