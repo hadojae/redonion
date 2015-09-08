@@ -727,11 +727,11 @@ function bro ()
   
     #decompress, cd to source
     cd $wrk_dir
-    wget "https://www.bro.org/downloads/release/bro-2.4.tar.gz"
+    wget "https://www.bro.org/downloads/release/bro-2.4.1.tar.gz"
     handle_error
-    tar xzf bro-2.4.tar.gz
+    tar xzf bro-2.4.1.tar.gz
     handle_error
-    cd bro-2.4/
+    cd bro-2.4.1/
     handle_error
 
     #install bro
@@ -782,7 +782,7 @@ function bro ()
     fi
      
     print_status "cleanup..."
-    rm -rf $wrk_dir/bro-2.4
+    rm -rf $wrk_dir/bro-2.4.1
     handle_error
     $install_dir/bro/bin/broctl cron enable
     handle_error
