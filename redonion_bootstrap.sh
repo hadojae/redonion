@@ -947,12 +947,12 @@ function suricata ()
     
     # Uncompress Suri install files
     cd $wrk_dir
-    wget "http://www.openinfosecfoundation.org/download/suricata-2.0.8.tar.gz"
+    wget "http://www.openinfosecfoundation.org/download/suricata-2.0.9.tar.gz"
     handle_error
-    tar xzf suricata-2.0.8.tar.gz
+    tar xzf suricata-2.0.9.tar.gz
     handle_error
-    print_status "cd suricata-2.0.8/..."
-    cd suricata-2.0.8/
+    print_status "cd suricata-2.0.9/..."
+    cd suricata-2.0.9/
     handle_error
 
     print_status "Installing suri...wooo..."
@@ -1054,7 +1054,7 @@ EOF
    fi
  
     print_status "cleanup and moving back to working dir..."
-    rm -rf $wrk_dir/suricata-2.0.8
+    rm -rf $wrk_dir/suricata-2.0.9
     handle_error
     cd $wrk_dir
     handle_error
