@@ -76,9 +76,9 @@ function check_viewer {
 function check_logstash {
         logstash_pid=$(ps aux | grep 'logstash' | grep -v grep | awk '{ print $2 }')
         if [ -z $logstash_pid ]; then
-                is_viewer_running=0
+                is_logstash_running=0
         else
-                is_viewer_running=1
+                is_logstash_running=1
         fi
 }
  
