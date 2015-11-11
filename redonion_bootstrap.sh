@@ -841,6 +841,8 @@ function suricata ()
       rm -f /usr/lib64/lua/5.1/ltn12ce 
       rm -f /usr/lib64/lua/5.1/zlib.so 
       rm -f /usr/lib64/lua/5.1/struct.so
+      print_status "Removing decompressed lua thirdparty modules so they can be rebuilt..."
+      rm -f $wrk_dir/lua_stuff
     else
       SKIP=1
     fi
