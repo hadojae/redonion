@@ -1,4 +1,4 @@
-**Please note: This buildscript is currently considered to be in BETA. It is a work in progress. Please report any problems or issues you encounter. Thank you!**
+**Please note: The 7.1 buildscript is currently considered to be in BETA. It is a work in progress. Please report any problems or issues you encounter. Thank you!**
 
 .. role:: math(raw)
    :format: html latex
