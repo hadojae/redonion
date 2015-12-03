@@ -9,7 +9,7 @@
 
 RedOnion is meant to provide a simple foundational build script for
 those wishing to deploy network security monitoring tools on RHEL/Centos
-6.7.
+6.7 and 7.1.
 
 This script will install the following tools:
 
@@ -46,7 +46,7 @@ You can install them all, or you can install just a few individually.
 
 **Installation Steps:**
 
-1. Setup and partition server. Recommend fresh updated version of RHEL/Centos 6.7
+1. Setup and partition server. Recommend fresh updated version of RHEL/Centos 6.7 or 7.1
 2. git clone https://github.com/hadojae/redonion
 3. Modify the global variables at the top of redonion_bootstrap.sh to fit your deployment
 4. Run './redonion_bootstrap.sh -ro' as root
