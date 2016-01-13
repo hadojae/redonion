@@ -527,7 +527,7 @@ function pf_ring_rpm ()
     read answer
     if [[ $answer == "y" ]] ; then
       print_status "Pulling pfring src from Github"
-      git clone https://github.com/ntop/PF_RING $install_dir/pfring
+      git clone -b 6.0.3-stable https://github.com/ntop/PF_RING $install_dir/pfring
       handle_error
       SKIP=0
     else
