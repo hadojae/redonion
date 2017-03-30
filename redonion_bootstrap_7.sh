@@ -887,11 +887,11 @@ function suricata ()
     handle_error
     cd ..
 
-    luarocks install struct 
+    /usr/local/bin/luarocks install struct 
     handle_error
-    luarocks install lua-apr 
+    /usr/local/bin/luarocks install lua-apr 
     handle_error
-    luarocks install luazip 
+    /usr/local/bin/luarocks install luazip 
     handle_error
 
     # LUA ZLIB
