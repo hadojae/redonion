@@ -131,7 +131,13 @@ source /etc/profile
     print_error "Check for root user failed. Please run this script as root."
     exit 1
   fi
-  
+
+  # Check for work directory
+    if [ ! -d $wrk_dir ]; then
+      print_error "Your defined work directory does not seem to exist. Check if wrk_dir is set to the directory where you cloned redonion."
+      exit 0
+    fi
+
   # Check to see that we're on Centos 7
   if [ -f /etc/centos-release ]; then
     distro="CentOS"
