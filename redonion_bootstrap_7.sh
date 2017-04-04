@@ -13,7 +13,7 @@ sniff_int="eno33554984"            			# Whatever interface you will use for snif
 manage_int="eno16777736"           			# Whatever interface you will use for management  
 manage_ip="10.10.2.119"      			    # Management IP address                     
 user_drop="ro"          			          # A user account to drop permissions to during install
-wrk_dir="/home/ro/redonion"      # The directory you will be installing from 
+wrk_dir="/home/ro/redonion"      # The directory you will be installing from (this is where you cloned the redonion repo)
 num_bro_pf_proc="4"           			    # The number of BRO load balanced worked processes you want to run 
 install_dir="/opt"          			      # Where you want to install the tools
 pf_num_rings="32768"        			      # Number of rings you want to allocate for pf_ring      
@@ -131,7 +131,13 @@ source /etc/profile
     print_error "Check for root user failed. Please run this script as root."
     exit 1
   fi
-  
+
+  # Check for work directory
+    if [ ! -d $wrk_dir ]; then
+      print_error "Your defined work directory does not seem to exist. Check if wrk_dir is set to the directory where you cloned redonion."
+      exit 0
+    fi
+
   # Check to see that we're on Centos 7
   if [ -f /etc/centos-release ]; then
     distro="CentOS"
