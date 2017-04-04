@@ -12,15 +12,15 @@
 sniff_int="eno33554984"            			# Whatever interface you will use for sniffing  
 manage_int="eno16777736"           			# Whatever interface you will use for management  
 manage_ip="10.10.2.119"      			    # Management IP address                     
-user_drop="ro"          			          # A user account to drop permissions to during install
-wrk_dir="/home/ro/redonion"      # The directory you will be installing from (this is where you cloned the redonion repo)
+user_drop="ro"          			        # A user account to drop permissions to during install
+wrk_dir="/home/ro/redonion"                 # The directory you will be installing from
 num_bro_pf_proc="4"           			    # The number of BRO load balanced worked processes you want to run 
-install_dir="/opt"          			      # Where you want to install the tools
-pf_num_rings="32768"        			      # Number of rings you want to allocate for pf_ring      
-pf_trans_mode="0"           			      # Mode you want pf_ring to run in - 0 (no pfring nic drivers) 1 (both) or 2 (only pfring drivers)
-etpro_license=""                        # Enter in etpro license, if empty will install community ruleset
-proxy_ip=""                             # Proxy IP address/dns
-proxy_port=""                           # Proxy Port
+install_dir="/opt"          			    # Where you want to install the tools
+pf_num_rings="32768"        			    # Number of rings you want to allocate for pf_ring      
+pf_trans_mode="0"           			    # Mode you want pf_ring to run in - 0 (no pfring nic drivers) 1 (both) or 2 (only pfring drivers)
+etpro_license=""                            # Enter in etpro license, if empty will install community ruleset
+proxy_ip=""                                 # Proxy IP address/dns
+proxy_port=""                               # Proxy Port
 
 ### Moloch Config Variables ###
 es_mem="1G"					                    # How much memory should elasticsearch for moloch have? (< 32G)
