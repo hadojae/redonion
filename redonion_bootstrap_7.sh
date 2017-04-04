@@ -186,6 +186,15 @@ source /etc/profile
         handle_error
     fi
   fi
+
+  # Make sure net-tools is installed on centos for ifconfig
+  if [ -f /etc/centos-release ]; then
+    if [[ ! `yum list installed | grep net-tools | awk '{ print $1 }'` ]]; then
+        print_status "net-tools not found, installing for ifconfig..."
+        sudo yum -y install net-tools
+        handle_error
+    fi
+  fi
   
   # Check to make sure that the user that we are running as and dropping permissions to exists
   if id -u "$user_drop" >/dev/null 2>&1; then
