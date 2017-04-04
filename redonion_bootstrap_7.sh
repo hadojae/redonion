@@ -616,8 +616,8 @@ function pf_ring_rpm ()
 
     # Build tcpdump
     print_status "Building tcpdump..."
-    print_status "cd ../tcpdump-4.1.1..."
-    cd ../tcpdump-4.1.1
+    print_status "cd ../tcpdump-4.9.0..."
+    cd ../tcpdump-4.9.0
     handle_error
     print_status "./configure --prefix=/usr/local/pfring..."
     ./configure --prefix=/usr/local/pfring 
